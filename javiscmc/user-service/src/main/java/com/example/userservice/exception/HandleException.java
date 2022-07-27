@@ -62,7 +62,7 @@ public class HandleException {
     }
 
     @ExceptionHandler({SQLException.class, Exception.class})
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public CustomResponse handleSQLException(SQLException sqlException, Exception exception) {
         CustomResponse response = new CustomResponse();
 
