@@ -7,6 +7,7 @@ import com.example.userservice.dto.CustomMessage;
 import com.example.userservice.dto.UserResponseDTO;
 import com.example.userservice.dto.UserRequestDTO;
 import com.example.userservice.service.UserService;
+import com.example.userservice.utils.ConvertJsonUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,12 +25,13 @@ import java.util.UUID;
 @RequestMapping(value = "/api/v1/user")
 public class UserController {
     private final UserService service;
-
-    @Autowired
     private RabbitTemplate template;
+    private ConvertJsonUtils convertJsonUtils;
 
-    public UserController(UserService service) {
+    public UserController(UserService service, RabbitTemplate template, ConvertJsonUtils convertJsonUtils) {
         this.service = service;
+        this.template = template;
+        this.convertJsonUtils = convertJsonUtils;
     }
 
     @GetMapping(value = "")
@@ -41,6 +43,11 @@ public class UserController {
     @PostMapping("")
     public CustomResponse<UserResponseDTO> createUser(@RequestBody @Valid UserRequestDTO dto) {
         var createUserInfo = service.createUser(dto);
+        CustomMessage message = new CustomMessage();
+        message.setMessageId(UUID.randomUUID().toString());
+        message.setMessage(convertJsonUtils.convertObjToString(createUserInfo));
+        template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
+        System.out.println("sending " + message + " to Exchange ");
         return new CustomResponse(HttpStatus.OK.value(), HttpStatusConstants.SUCCESS_MESSAGE, createUserInfo);
     }
 

@@ -2,10 +2,7 @@ package com.example.userservice.dto;
 
 import com.example.userservice.converter.MemberTypeEnumConverter;
 import com.example.userservice.entity.MemberType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -14,6 +11,7 @@ import javax.persistence.Convert;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserResponseDTO {
     private long id;
     private String email;
