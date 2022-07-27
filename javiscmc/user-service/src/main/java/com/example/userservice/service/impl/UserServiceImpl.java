@@ -7,7 +7,6 @@ import com.example.userservice.dto.UserRequestDTO;
 import com.example.userservice.entity.MemberType;
 import com.example.userservice.entity.User;
 import com.example.userservice.exception.BusinessException;
-import com.example.userservice.kafka.producer.KafkaProducer;
 import com.example.userservice.mapper.UserMapper;
 import com.example.userservice.mapper.UserResponseMapper;
 import com.example.userservice.repository.UserRepository;
@@ -34,18 +33,15 @@ public class UserServiceImpl implements UserService {
 
     private static final double GOLDEN_STANDARD = 50000;
 
-    private final KafkaProducer producer;
-
     private ConvertJsonUtils convertJsonUtils;
 
     private PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository repository, UserMapper mapper,
-                           KafkaProducer producer, ConvertJsonUtils convertJsonUtils,
+                           ConvertJsonUtils convertJsonUtils,
                            UserResponseMapper responseMapper, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.mapper = mapper;
-        this.producer = producer;
         this.convertJsonUtils = convertJsonUtils;
         this.responseMapper = responseMapper;
         this.passwordEncoder = passwordEncoder;
@@ -70,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
         //kafka sending
         String message = convertJsonUtils.convertObjToString(userResponseDTO);
-        producer.send(message);
+        System.out.println(message);
         return userResponseDTO;
     }
 
