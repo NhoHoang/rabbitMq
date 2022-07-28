@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/javiscmc/gateway/gateway.iml" filepath="$PROJECT_DIR$/javiscmc/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/javiscmc/nhohoang.iml" filepath="$PROJECT_DIR$/javiscmc/nhohoang.iml" />
       <module fileurl="file://$PROJECT_DIR$/javiscmc/notification-service/notification-service.iml" filepath="$PROJECT_DIR$/javiscmc/notification-service/notification-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javiscmc/notification2-service/notification2-service.iml" filepath="$PROJECT_DIR$/javiscmc/notification2-service/notification2-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/rabbitMq.iml" filepath="$PROJECT_DIR$/.idea/rabbitMq.iml" />
       <module fileurl="file://$PROJECT_DIR$/javiscmc/user-service/user-service.iml" filepath="$PROJECT_DIR$/javiscmc/user-service/user-service.iml" />
     </modules>
