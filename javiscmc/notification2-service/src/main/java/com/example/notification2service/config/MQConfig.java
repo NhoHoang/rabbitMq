@@ -1,4 +1,4 @@
-package com.example.notification.config;
+package com.example.notification2service.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MQConfig {
 
-    public static final String QUEUE = "message_queue1";
+    public static final String QUEUE = "message_queue2";
     public static final String EXCHANGE = "message_exchange";
     public static final String ROUTING_KEY = "message_routingKey";
 
@@ -32,7 +32,6 @@ public class MQConfig {
                 .to(exchange)
                 .with(ROUTING_KEY);
     }
-
     @Bean
     public MessageConverter messageConverter() {
         return  new Jackson2JsonMessageConverter();
