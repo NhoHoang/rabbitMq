@@ -8,6 +8,7 @@ import com.example.userservice.dto.UserResponseDTO;
 import com.example.userservice.dto.UserRequestDTO;
 import com.example.userservice.service.UserService;
 import com.example.userservice.utils.ConvertJsonUtils;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,6 +49,7 @@ public class UserController {
         message.setMessage(convertJsonUtils.convertObjToString(createUserInfo));
         template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
         System.out.println("sending " + message + " to Exchange ");
+//        checkResponseMessage();
         return new CustomResponse(HttpStatus.OK.value(), HttpStatusConstants.SUCCESS_MESSAGE, createUserInfo);
     }
 
@@ -56,7 +58,6 @@ public class UserController {
         message.setMessageId(UUID.randomUUID().toString());
 //        message.setMessageDate(new Date());
         template.convertAndSend(MQConfig.EXCHANGE, MQConfig.ROUTING_KEY, message);
-
         return "Message Published";
     }
 

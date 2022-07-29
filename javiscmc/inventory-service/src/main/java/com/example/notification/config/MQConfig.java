@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MQConfig {
 
-    public static final String QUEUE = "message_queue1";
+    public static final String QUEUE = "message_queue";
     public static final String EXCHANGE = "message_exchange";
     public static final String ROUTING_KEY = "message_routingKey";
 
@@ -24,6 +24,7 @@ public class MQConfig {
     public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE);
     }
+
 
     @Bean
     public Binding binding(Queue queue, TopicExchange exchange) {
